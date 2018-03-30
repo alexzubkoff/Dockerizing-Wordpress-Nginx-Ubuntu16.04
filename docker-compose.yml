@@ -11,7 +11,7 @@ nginx:
     restart: always
 
 mysql:
-    image: mariadb
+    image: mysql
     ports:
         - '3306:3306'
     volumes:
@@ -34,3 +34,15 @@ wordpress:
     links:
         - mysql
     restart: always
+
+phpmyadmin:
+    image: 'phpmyadmin/phpmyadmin'
+    restart: always
+    ports:
+       - '8080:80'
+    links:
+        - mysql:mysql
+    environment:
+        MYSQL_USERNAME: root
+        MYSQL_ROOT_PASSWORD: root
+        PMA_HOST: mysql
